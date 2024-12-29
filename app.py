@@ -7,8 +7,8 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 # Cache model and tokenizer loading to avoid reloading each time
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model('lstm_model.keras')  # Path to your trained model
-    tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))  # Path to your tokenizer
+    model = tf.keras.models.load_model('lstm_model.keras')  
+    tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))  
     return model, tokenizer
 
 # Load the trained model and tokenizer once
@@ -22,13 +22,13 @@ def preprocess_input(text):
 
 st.title('Financial News Sentiment Analysis')
 
-tweet = st.text_input('Enter your News')
+news = st.text_input('Enter your News')
 
 submit = st.button('Predict')
 
 if submit:
     start = time.time()
-    preprocessed_input = preprocess_input(tweet)
+    preprocessed_input = preprocess_input(news)
     prediction = model.predict(preprocessed_input)
     end = time.time()
 
